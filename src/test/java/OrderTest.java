@@ -68,7 +68,7 @@ public class OrderTest extends BaseTest {
         ordSteps = new OrdSteps(driver);
     }
     @Test
-    public void positiveOrderTest(){
+    public void positiveOrderTestForUpBtn(){
         // Открыли сайт
         mainPage.openPage();
         // проверяем верхнюю кнопку заказать
@@ -81,6 +81,10 @@ public class OrderTest extends BaseTest {
         orderPage.clickOrderConfirmButton();//подтверждаем заказ
         //Проверяем что появилось сообщение с кнопкой Посмотреть статус
         assertEquals("Невозможно посмотреть статус заказа", "Посмотреть статус", orderPage.trackOrderInfoMsg());
+
+    }
+    @Test
+    public void positiveOrderTestForDwnBtn(){
         mainPage.openPage();
         //Проверяем также нижнюю кнопку
         orderPage.clickDwnOrdBtn();
@@ -92,5 +96,4 @@ public class OrderTest extends BaseTest {
         //Проверяем что появилось сообщение с кнопкой Посмотреть статус
         assertEquals("Невозможно посмотреть статус заказа", "Посмотреть статус", orderPage.trackOrderInfoMsg());
     }
-
 }

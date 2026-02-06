@@ -49,7 +49,13 @@ public class OrderPage {
     private By checkStatus = By.xpath("//button[text()='Посмотреть статус']");
 
     public WebElement orderForm() {
+
         return driver.findElement(By.className("Order_Form__17u6u"));
+    }
+    
+    public void waitOrderFormLoaded() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.visibilityOf(orderForm()));
     }
 
     //Нажимаем верхнюю кнопку заказать если её видно

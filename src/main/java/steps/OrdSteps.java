@@ -17,14 +17,15 @@ public class OrdSteps {
     public void fillForWhoOrdForm(String name,String surname,String address, String subway,String phoneNumber) {
         OrderPage orderPage = new OrderPage(driver);
         // Заполняем поля формы, если форма прогрузилась
-        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
-        wait.until(ExpectedConditions.visibilityOf(orderPage.orderForm()));
+        orderPage.waitOrderFormLoaded();
         orderPage.setName(name); // Имя
         orderPage.setSurname(surname); //фамилия
         orderPage.setAddress(address);// адрес
         orderPage.setSubway(subway);//название метро
         orderPage.setPhoneNumber(phoneNumber);//номер телефона
     }
+
+
 
     public void fillAboutOrderForm(String date,String rentalPeriod,String color,String comment){
         OrderPage orderPage = new OrderPage(driver);
