@@ -1,7 +1,10 @@
 package steps;
-import Pages.OrderPage;
-import org.openqa.selenium.By;
+import org.openqa.selenium.support.ui.ExpectedConditions;
+import org.openqa.selenium.support.ui.WebDriverWait;
+import pages.OrderPage;
 import org.openqa.selenium.WebDriver;
+
+import java.time.Duration;
 
 public class OrdSteps {
 
@@ -14,16 +17,15 @@ public class OrdSteps {
     public void fillForWhoOrdForm(String name,String surname,String address, String subway,String phoneNumber) {
         OrderPage orderPage = new OrderPage(driver);
         // Заполняем поля формы, если форма прогрузилась
-        driver.findElement(By.className("Order_Form__17u6u")).isDisplayed();
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.visibilityOf(orderPage.orderForm()));
         orderPage.setName(name); // Имя
         orderPage.setSurname(surname); //фамилия
         orderPage.setAddress(address);// адрес
         orderPage.setSubway(subway);//название метро
         orderPage.setPhoneNumber(phoneNumber);//номер телефона
-        // Добавьте задержку или проверку, если нужно
-        // Thread.sleep(1000);
-
     }
+
     public void fillAboutOrderForm(String date,String rentalPeriod,String color,String comment){
         OrderPage orderPage = new OrderPage(driver);
         orderPage.setDate(date);//дата

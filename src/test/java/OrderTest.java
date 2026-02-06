@@ -6,6 +6,7 @@ import steps.OrdSteps;
 import java.util.ArrayList;
 import java.util.List;
 
+import static org.junit.Assert.assertEquals;
 
 
 @RunWith(Parameterized.class)
@@ -70,15 +71,26 @@ public class OrderTest extends BaseTest {
     public void positiveOrderTest(){
         // Открыли сайт
         mainPage.openPage();
-        // клик кнопки заказать
-        orderPage.clickOrdBtn();
+        // проверяем верхнюю кнопку заказать
+        orderPage.clickUpOrdBtn();
         // ввод параметров в поля
         ordSteps.fillForWhoOrdForm(firstName,lastName,address,metroStation,phone);
         orderPage.clickOrderNextButton();//переходим на следующую страницу
         ordSteps.fillAboutOrderForm(date,rentalPeriod,color,comment);
         orderPage.clickOrderCreateButton();//создаем заказ
         orderPage.clickOrderConfirmButton();//подтверждаем заказ
-        orderPage.TrackOrderInfoMsg();//Проверяем что появилось сообщение с кнопкой Посмотреть статус
+        //Проверяем что появилось сообщение с кнопкой Посмотреть статус
+        assertEquals("Невозможно посмотреть статус заказа", "Посмотреть статус", orderPage.trackOrderInfoMsg());
+        mainPage.openPage();
+        //Проверяем также нижнюю кнопку
+        orderPage.clickDwnOrdBtn();
+        ordSteps.fillForWhoOrdForm(firstName,lastName,address,metroStation,phone);
+        orderPage.clickOrderNextButton();//переходим на следующую страницу
+        ordSteps.fillAboutOrderForm(date,rentalPeriod,color,comment);
+        orderPage.clickOrderCreateButton();//создаем заказ
+        orderPage.clickOrderConfirmButton();//подтверждаем заказ
+        //Проверяем что появилось сообщение с кнопкой Посмотреть статус
+        assertEquals("Невозможно посмотреть статус заказа", "Посмотреть статус", orderPage.trackOrderInfoMsg());
     }
 
 }

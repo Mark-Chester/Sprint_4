@@ -60,17 +60,11 @@ public class FaQTest extends BaseTest{
     public void questionsAccordion() {
         // Открыли сайт
         mainPage.openPage();
-        // нашли блок с вопросом
-        WebElement questionAnswerBlock = mainPage.findAnswerByQuestion(question);
-        //проверили что блок найден
-        assertNotNull("Block for question '" + question + "' not found", questionAnswerBlock);
-        // получаем текст ответа
-        String actualAnswer = faqSteps.getAnswer(questionAnswerBlock);
-        //сравниваем с ожидаемым текстом
+        //сравниваем текст вопроса с ожидаемым текстом из параметров
         assertEquals(
                 "Ответ на вопрос '" + question + "' не совпадает.",
                 expectedAnswer,
-                actualAnswer
+                faqSteps.getAnswer(question)
         );
     }
 }
