@@ -1,7 +1,9 @@
-package Pages;
+package pages;
 
 import org.openqa.selenium.By;
+import org.openqa.selenium.JavascriptExecutor;
 import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.WebElement;
 import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 
@@ -10,10 +12,12 @@ import java.time.Duration;
 public class OrderPage {
     private WebDriver driver;
     public OrderPage(WebDriver driver){
+
         this.driver = driver;
     }
     //Кнопка заказать верхняя
-    private By OrdBtn = By.xpath(".//button[@class='Button_Button__ra12g']");
+    private By upOrdBtn = By.xpath(".//button[@class='Button_Button__ra12g']");
+    private By dwnOrdBtn = By.xpath(".//button[contains(@class,'Button_Button__ra12g')]");
     // Имя
     private By nameField = By.xpath(".//input[@placeholder='* Имя']");
     // Фамилия
@@ -44,12 +48,34 @@ public class OrderPage {
     //Кнопка Посмотреть статус
     private By checkStatus = By.xpath("//button[text()='Посмотреть статус']");
 
-    //Нажимаем кнопку заказать если её видно
-    public void clickOrdBtn(){
-        if (driver.findElement(OrdBtn).isDisplayed()){
-            driver.findElement(OrdBtn).click();
+    public WebElement orderForm() {
+
+        return driver.findElement(By.className("Order_Form__17u6u"));
+    }
+    
+    public void waitOrderFormLoaded() {
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
+        wait.until(ExpectedConditions.visibilityOf(orderForm()));
+    }
+
+    //Нажимаем верхнюю кнопку заказать если её видно
+    public void clickUpOrdBtn(){
+        if (driver.findElement(upOrdBtn).isDisplayed()){
+            driver.findElement(upOrdBtn).click();
         }
     }
+    //Нажимаем скроллим до нижней кнопки и жмем заказать
+    public void clickDwnOrdBtn(){
+        WebElement parent = driver.findElement(By.className("Home_RoadMap__2tal_"));
+        ((JavascriptExecutor) driver).executeScript("arguments[0].scrollIntoView(true);", parent);
+
+        WebElement button = parent.findElement(dwnOrdBtn);
+        WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(10));
+        wait.until(ExpectedConditions.elementToBeClickable(dwnOrdBtn));
+        button.click();
+    }
+
+
     // Метод для заполнения поля * Имя
     public void setName(String name) {
         driver.findElement(nameField).sendKeys(name);
@@ -102,9 +128,9 @@ public class OrderPage {
         driver.findElement(orderConfirmButton).click();
     }
     //Метод для нахождения кнопки Посмотреть статус
-    public void TrackOrderInfoMsg(){
+    public String trackOrderInfoMsg(){
         WebDriverWait wait = new WebDriverWait(driver, Duration.ofSeconds(3));
         wait.until(ExpectedConditions.presenceOfElementLocated(checkStatus));
+        return driver.findElement(checkStatus).getText();
     }
-
 }
