@@ -7,6 +7,7 @@ import org.openqa.selenium.WebElement;
 public class FaqSteps {
     private final MainPage mainPage;
 
+
     public FaqSteps(MainPage mainPage) {
         this.mainPage = mainPage;
     }

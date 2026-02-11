@@ -133,5 +133,4 @@ public class OrderPage {
         wait.until(ExpectedConditions.presenceOfElementLocated(checkStatus));
         return driver.findElement(checkStatus).getText();
     }
-
 }

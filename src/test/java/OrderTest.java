@@ -5,9 +5,7 @@ import org.junit.runners.Parameterized;
 import steps.OrdSteps;
 import java.util.ArrayList;
 import java.util.List;
-
 import static org.junit.Assert.assertEquals;
-
 
 @RunWith(Parameterized.class)
 public class OrderTest extends BaseTest {
@@ -67,6 +65,7 @@ public class OrderTest extends BaseTest {
     public void setUp(){
         ordSteps = new OrdSteps(driver);
     }
+
     @Test
     public void positiveOrderTestForUpBtn(){
         // Открыли сайт

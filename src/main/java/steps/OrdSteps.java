@@ -1,10 +1,6 @@
 package steps;
-import org.openqa.selenium.support.ui.ExpectedConditions;
-import org.openqa.selenium.support.ui.WebDriverWait;
 import pages.OrderPage;
 import org.openqa.selenium.WebDriver;
-
-import java.time.Duration;
 
 public class OrdSteps {
 
